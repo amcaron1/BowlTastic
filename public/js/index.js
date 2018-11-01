@@ -97,3 +97,63 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+
+
+
+
+//BUTTON 1
+
+function initLocalClocks() {
+  var seconds = date.getSeconds();
+  var minutes = date.getMinutes();
+  var hours = date.getHours();
+                           }
+
+
+
+$("button1").on("click", function() {
+  $("container").empty();
+ 
+  $( "container" ).append( "newDivTIMER" );
+///sending the clockin to the screen
+
+$("button1").bind("click", function() {
+ $("").array.push("arrayofstarttimes");
+
+ //taking start clock in time
+
+$("button1").unbind("click", function() { 
+   $("").array.push("arrayofendtimes");
+//taking end clock time
+}
+
+
+
+    
+,)},)},)
+
+
+
+///BUTTON 2 
+
+$("button2").on("click", function() {
+    $("container").empty();
+ 
+    
+    $( "container" ).append( "newDiv" );
+   
+   
+      });
+
+
+//BUTTON 3
+
+  $("button3").on("click", function() {
+        $("container").empty();
+
+
+        $( "container" ).append( "newDiv" );
+
+   });
+    
