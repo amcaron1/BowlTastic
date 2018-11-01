@@ -8,6 +8,14 @@ module.exports = function(sequelize, DataTypes) {
   
      });
   
+     Joba.associate = function(models) {
+      Jobs.belongsTo(models.Employee, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
+  
     return Jobs;
   };
   
