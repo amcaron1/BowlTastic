@@ -4,8 +4,12 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
+    email:  {
+      type: Sequelize.STRING,
+      validate: {isEmail: true,}
+  }
+});
 
-  });
 
 
   Employee.associate = function(models) {
