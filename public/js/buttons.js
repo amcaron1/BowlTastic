@@ -17,30 +17,28 @@ $("button1").unbind("click", function() {
 //taking end clock time
 }
     
-});
+,)},)},)
 
+
+
+///BUTTON 2 
 
 $("button2").on("click", function() {
     $("container").empty();
+ 
     
     $( "container" ).append( "newDiv" );
    
    
       });
 
-//--- show that pushed data into a table that will be appended after click
+
 
   $("button3").on("click", function() {
         $("container").empty();
+
+
         $( "container" ).append( "newDiv" );
 
-       
-  
- });
-     //THIS IS THE TIME OFF REQUEST TEXT BOX
-    // <form>
-    // <div class="form-group">
-    //<label for="exampleFormControlTextarea1">Example textarea</label>
-    //<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  //</div>
-//</form>
+   });
+    
