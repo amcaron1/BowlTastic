@@ -4,6 +4,14 @@ module.exports = function(sequelize, DataTypes) {
         pay_rate: DataTypes.INTEGER,
      });
   
-    return Hours;
+     Salary.associate = function(models) {
+        Salary.belongsTo(models.Employee, {
+            foreignKey: {
+              allowNull: false
+            }
+          });
+        };
+    
+    return Salary;
   };
   
