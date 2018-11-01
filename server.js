@@ -12,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
+
 // Routes
 require("./routes/employee-api-paths")(app);
+
+require("./routes/employee-api-paths")(app);
+require("./routes/hours-api-paths")(app);
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
