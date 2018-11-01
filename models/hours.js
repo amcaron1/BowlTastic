@@ -2,9 +2,7 @@ module.exports = function(sequelize, DataTypes) {
 
     var Hours = sequelize.define("Hours", {
       punch_time: DataTypes.DATE,
-      punch_type: DataTypes.STING,
-      employee_id: DataTypes.INTEGER,
-
+      punch_type: DataTypes.BOOLEAN,
      });
 
      Hours.associate = function(models) {
