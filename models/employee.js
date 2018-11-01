@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
     email:  {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {isEmail: true,}
   }
 });
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
     Employee.hasOne(models.Jobs, {
-      onDelete: "cascade" 
+      onDelete: "cascade"
     });
     Employee.hasOne(models.Salary, {
       onDelete: "cascade"
