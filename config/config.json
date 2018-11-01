@@ -3,7 +3,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "bowl ",
+    "database": "bowl",
     "host": "localhost",
     "dialect": "mysql"
   },
