@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
   
      });
   
-     Joba.associate = function(models) {
+     Jobs.associate = function(models) {
       Jobs.belongsTo(models.Employee, {
           foreignKey: {
             allowNull: false

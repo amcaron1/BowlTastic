@@ -4,9 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
-    job: DataTypes.STRING,
-    hours: DataTypes.INEGER, 
-    salary: DataTypes.INEGER, 
+
   });
 
 
