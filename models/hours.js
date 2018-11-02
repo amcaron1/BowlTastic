@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-    var Hours = sequelize.define("Hours", {
+    var Hours = sequelize.define("Hour", {
       punch_time: DataTypes.DATE,
       punch_type: DataTypes.BOOLEAN,
      });

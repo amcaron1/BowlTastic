@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Employee.associate = function(models) {
 
-    Employee.hasMany(models.Hours, {
+    Employee.hasMany(models.Hour, {
       onDelete: "cascade"
     });
     Employee.hasOne(models.Jobs, {
