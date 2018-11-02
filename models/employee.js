@@ -1,13 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
 
   var Employee = sequelize.define("Employee", {
-    name: DataTypes.STRING,
+    name: {type: DataTypes.STRING, allowNull:false},
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
     email:  {
       type: DataTypes.STRING,
       validate: {isEmail: true,}
-  }
+  },
+    username: {type: DataTypes.STRING, allowNull:false},
+    password: {type: DataTypes.STRING, allowNull:false},
+
 });
 
 
