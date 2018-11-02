@@ -21,7 +21,7 @@ module.exports = function(app) {
           db.Hour.create({timein:Sequelize.fn('NOW'),EmployeeId:req.user.id})
         }
       })
-      res.json("{clocked:'yep!'}")
+      res.json({clocked:'yep!'})
     });
 
     app.delete("/api/hours/delete/:id", function(req, res) {
