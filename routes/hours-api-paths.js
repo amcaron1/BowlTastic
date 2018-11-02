@@ -14,7 +14,7 @@ module.exports = function(app) {
       })
   })
 
-""  app.get("/api/hours/out/:id", function(req,res) {
+  app.get("/api/hours/out/:id", function(req,res) {
     db.Hours.findAll({where: {id: req.params.id}}).then(function(dbHours) {
         res.json(dbHours);
         })
