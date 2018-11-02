@@ -95,6 +95,9 @@
                 employeeTable.append("</tr>")
         //add a for loop to append all employee objects in as a new table row
 
+        $.get("/api/employees", function(req, response) {
+            console.log(response);
+        });
 
         $("#managerDisplay").append(employeeTable);
     };
@@ -124,20 +127,19 @@
         let postUsername = $("#newUsername").val().trim();
         let postPassword = $("#newPassword").val().trim();
 
-        let newEmployee = [
+        let newEmployee =
             {
                 name: postName,
                 username: postUsername,
                 password: postPassword
             }
-        ]
+
+            console.log(newEmployee);
 
         $.post("/api/employees", newEmployee, function(response) {
             console.log(response);
         });
 
-        
-        // post to /api/employees
     });
 
     //Payroll button
