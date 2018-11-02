@@ -1,11 +1,14 @@
 var db = require("../models");
+var Sequelize = require('sequelize');
 
 module.exports = function(app) {
   app.get("/api/employees", function(req, res) {
 
     db.Employee.findAll({}).then(function(dbEmployee) {
-      res.json(dbEmployee);
-    });
+      console.log(dbEmployee);
+      res.send(dbEmployee)
+    })
+
   });
 
   app.get("/api/employees/:id", function(req, res) {
@@ -20,10 +23,18 @@ module.exports = function(app) {
   });
 
   app.post("/api/employees", function(req, res) {
-    db.Employee.create(req.body).then(function(dbEmployee) {
+    console.log(req.body)
+    db.Employee.create({name:req.body.name,username:req.body.username, password:req.body.password,start_date:Sequelize.fn('NOW')}).then(function(dbEmployee) {
       res.json(dbEmployee);
     });
   });
+  app.put("/api/employees/fired", function(req, res) {
+    console.log(req.body)
+    db.Employee.update({end_date:Sequelize.fn('NOW')},{where:{id:req.body.id}}).then(function(dbEmployee) {
+      res.json(dbEmployee);
+    });
+  });
+
 
   app.delete("/api/employees/:id", function(req, res) {
     db.Employee.destroy({
