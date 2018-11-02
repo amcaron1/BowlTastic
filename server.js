@@ -1,8 +1,11 @@
 require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
-
+var session = require("express-session");
 var db = require("./models");
+var passport = require("passport");
+
+require('./config/passport.js')(passport);
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -11,11 +14,11 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
-
-
+app.use(session({secret:"thesecret", saveUninitialized:false, resave:false}))
+app.use(passport.initialize())
+app.use(passport.session())
 // Routes
-require("./routes/employee-api-paths")(app);
-
+require("./routes/auth.js")(passport);
 require("./routes/employee-api-paths")(app);
 require("./routes/hours-api-paths")(app);
 require("./routes/htmlRoutes")(app);

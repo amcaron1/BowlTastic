@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BowlTastic - Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/styles.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/test.js"></script>
 </head>
 <body>
 
@@ -22,17 +21,9 @@
 
         <div class="row">
             <div class="col-lg-6 text-center mx-auto">
-                <form>
-                    <div class="form-group">
-                        <label for="loginID">Employee ID</label>
-                        <input type="text" class="form-control" id="loginID" placeholder="Employee ID">
-                    </div>
-                    <div class="form-group">
-                      <label for="loginPassword">Password</label>
-                      <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <input type="text" id="loginID" name="username" value="">
+                <input type="text" id="loginPassword"  name="password" value="">
+                <button class="btn btn-primary" id="submit">Submit</button>
             </div>
         </div>
     </div>
