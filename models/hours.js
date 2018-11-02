@@ -1,8 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
 
     var Hours = sequelize.define("Hour", {
-      punch_time: DataTypes.DATE,
-      punch_type: DataTypes.BOOLEAN,
+      timein: DataTypes.DATE,
+      timeout: DataTypes.DATE,
      });
 
      Hours.associate = function(models) {
@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
             }
           });
         };
-  
+
     return Hours;
   };
-  
