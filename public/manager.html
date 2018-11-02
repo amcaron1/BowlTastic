@@ -59,13 +59,31 @@
 
 <script>
 
-    //Employee List
+    //Employee List button
     $("#employeeListButton").on("click",function() {
         event.preventDefault();
-
+        
         $("#managerDisplay").empty();
         
-        //pull from database here
+        displayEmployees();
+    });
+
+    function displayEmployees() {
+
+        let newEmployeeButton = $("<button>Add New Employee</button>");
+            newEmployeeButton.attr("id", "newEmployeeButton");
+            newEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(newEmployeeButton);
+
+        let updateEmployeeButton = $("<button>Update Employee</button>");
+            updateEmployeeButton.attr("id", "updateEmployeeButton");
+            updateEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(updateEmployeeButton);
+
+        let removeEmployeeButton = $("<button>Remove Employee</button>");
+            removeEmployeeButton.attr("id", "removeEmployeeButton");
+            removeEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(removeEmployeeButton);
 
         let employeeTable = $("<table>");
             employeeTable.addClass("table table-hover managerTable");
@@ -74,14 +92,55 @@
                     employeeTable.append("<th>Name</th>");
                     employeeTable.append("<th>Start Date</th>");
                     employeeTable.append("<th>End Date</th>");
-                employeeTable.append("</tr>");
-
+                employeeTable.append("</tr>")
         //add a for loop to append all employee objects in as a new table row
 
-        $("#managerDisplay").append(employeeTable)
+
+        $("#managerDisplay").append(employeeTable);
+    };
+
+    //add new employee button
+    $(document).on("click","#newEmployeeButton",function() {
+        event.preventDefault();
+        
+        let newEmployeeForm = $("<div>");
+            newEmployeeForm.append("<form>");
+                newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='Name'>")
+                newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
+                newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
+                newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
+            newEmployeeForm.append("</form>");
+        
+        $("#managerDisplay").empty();
+        $("#managerDisplay").append(newEmployeeForm);
+
     });
 
-    //Payroll
+    //New submit employee button
+    $(document).on("click","#newEmployeeSubmit",function() {
+        event.preventDefault();
+        
+        let postName = $("#newName").val().trim();
+        let postUsername = $("#newUsername").val().trim();
+        let postPassword = $("#newPassword").val().trim();
+
+        let newEmployee = [
+            {
+                name: postName,
+                username: postUsername,
+                password: postPassword
+            }
+        ]
+
+        $.post("/api/employees", newEmployee, function(response) {
+            console.log(response);
+        });
+
+        
+        // post to /api/employees
+    });
+
+    //Payroll button
     $("#payrollButton").on("click",function() {
         event.preventDefault();
 
@@ -89,13 +148,48 @@
         $("#managerDisplay").empty();
     });
 
-    //Employee Timeclock
+    //Employee Timeclock button
     $("#timeclockButton").on("click",function() {
         event.preventDefault();
         
         $("#managerDisplay").empty();
 
+        let timeclockTable = $("<table>");
+            timeclockTable.addClass("table table-hover managerTable");
+            timeclockTable.append("<tr>");
+                timeclockTable.append("<th>Employee ID</th>");
+                timeclockTable.append("<th>Name</th>");
+                timeclockTable.append("<th>Date</th>");
+                timeclockTable.append("<th>Time In</th>");
+                timeclockTable.append("<th>Time Out</th>");
+            timeclockTable.append("</tr>");
+
+        //For loop to append objects from database as a new table row
+
+        $("#managerDisplay").append(timeclockTable);
 
     });
 
+    //Current employee roles button
+    $("#rolesButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+
+        let rolesTable = $("<table>");
+            rolesTable.addClass("table table-hover managerTable");
+            rolesTable.append("<tr>");
+                rolesTable.append("<th>Employee ID</th>");
+                rolesTable.append("<th>Name</th>");
+                rolesTable.append("<th>Job Title</th>");
+                rolesTable.append("<th>Job ID</th>");
+                rolesTable.append("<th>Date Started</th>");
+                rolesTable.append("<th>Date Ended</th>");
+            rolesTable.append("</tr>");
+
+        //For loop to append objects from database as a new table row
+
+        $("#managerDisplay").append(rolesTable);
+
+    });
 </script>
