@@ -10,6 +10,6 @@ module.exports = function(passport){
           successRedirect: '/employee',
       }), function (req, res) {
           res.send('hey')
-      })
+      });
       return router;
-}
+};
