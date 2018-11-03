@@ -9,7 +9,7 @@ module.exports = function(passport){
           failureRedirect: '/',
           successRedirect: '/employee',
       }), function (req, res) {
-        res.status(),end()
+          res.send('hey')
       })
-      return router
+      return router;
 }
