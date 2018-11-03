@@ -16,12 +16,13 @@ module.exports = function(app) {
         if(user[0].dataValues.timeout == null){
           var currentid = user[0].dataValues.id
           db.Hour.update({timeout:Sequelize.fn('NOW')},{where:{id:currentid}})
+          res.send("You have clocked out at : ")
         }
         else{
           db.Hour.create({timein:Sequelize.fn('NOW'),EmployeeId:req.user.id})
+          res.send("You have clocked in at : ")
         }
       })
-      res.json({clocked:'yep!'})
     });
 
     app.delete("/api/hours/delete/:id", function(req, res) {
