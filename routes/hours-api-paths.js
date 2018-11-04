@@ -1,7 +1,7 @@
 var db = require("../models");
 var Sequelize = require('sequelize');
-const Op = Sequelize.Op
-const moment = require("moment")
+const Op = Sequelize.Op;
+const moment = require("moment");
 
 module.exports = function(app) {
   app.post("/api/gethours", function(req, res) {
@@ -13,7 +13,15 @@ module.exports = function(app) {
               EmployeeId:req.user.id
           }
       }).then(response=>{
-          res.send(response)
+          if (response[0] === undefined) {
+              console.log("response empty")
+              res.send('No results returned for that time period.').end();
+          }
+          else{
+              console.log("response full")
+              res.send(response);
+          }
+
       });
   });
 
@@ -49,4 +57,4 @@ module.exports = function(app) {
         res.json(dbHours);
         });
     });
-}
+};
