@@ -51,21 +51,19 @@ $(document).ready(function(){
         });
     })
 
-
-
-
-});
-
-$(document).on("click",".dateSubmit",function(){
-    let startDate = $(".startdate").val();
-    let endDate = $(".enddate").val();
-
-    let objToSend ={
-        start:startDate,
-        end:endDate
-    }
-    $.ajax({
-        url:"/api/hours/"
+$(document).on("change",".payPeriodMenu", function(){
+    let day = $(".payPeriodMenu").val()
+    $("#datepicker1").val(day)
+    $("#datepicker2").val(moment(day).add(7,"d").format("MM-DD-YYYY"))
+})
+$(document).on("click",".dateSubmit", function(){
+    let date1 = $("#datepicker1").val()
+    let date2 = $("#datepicker2").val()
+    let objToSend = {date1:date1,date2:date2}
+    console.log(objToSend)
+    $.post("/api/gethours", objToSend, function(response){
+        console.log(response)
     })
+})
 
 });

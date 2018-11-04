@@ -1,14 +1,19 @@
 var db = require("../models");
 var Sequelize = require('sequelize');
+const Op = Sequelize.Op
+const moment = require("moment")
 
 module.exports = function(app) {
-  app.get("/api/hours", function(req, res) {
+  app.post("/api/gethours", function(req, res) {
       db.Hour.findAll({
           where: {
-              created_at: {
-                  "$between": ["2018-03-31T21:00:00.000Z","2018-05-30T05:23:59.007Z"]
-              }
+              createdAt: {
+                  [Op.between]: [moment(req.body.date1).format("YYYY-MM-DD HH:mm:ss"),moment(req.body.date2).format("YYYY-MM-DD HH:mm:ss")]
+              },
+              EmployeeId:req.user.id
           }
+      }).then(response=>{
+          res.send(response)
       });
   });
 
