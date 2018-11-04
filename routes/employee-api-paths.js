@@ -10,6 +10,11 @@ module.exports = function(app) {
     })
 
   });
+  app.get("/api/currentuser", function(req,res){
+    db.Employee.findOne({where:{id:req.user.id}}).then(user=>{
+      res.json(user)
+    })
+  });
 
   app.get("/api/employees/:id", function(req, res) {
 
@@ -45,4 +50,4 @@ module.exports = function(app) {
       res.json(dbEmployee);
     });
   })
-}
+};

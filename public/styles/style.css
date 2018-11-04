@@ -12,9 +12,9 @@
 } */
 
 h1.title {
-  
+
     font-size: 120px;
-   
+
 }
 
 .margintwenty {
@@ -32,7 +32,7 @@ h1.title {
     box-shadow: 5px 5px #888888;
     margin-left: 100px;
     margin-top: 100px;
- 
+
 } */
 
 div.container {
@@ -49,3 +49,18 @@ align-content: center;
 .managerTable {
    margin-top:10px !important;
   }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
