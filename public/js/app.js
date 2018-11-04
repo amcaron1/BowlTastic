@@ -7,15 +7,12 @@ $(document).ready(function() {
     $(".clockin").on("click", function () {
         emptyContentDiv();
         $.post("/api/hours", function (res) {
-            console.log(res);
             $(".contentDiv").append("<h2>" + res + Date() + "</h2>")
         })
     });
 
 
     $.ajax({url: "/api/currentuser", method: "GET"}).then(response => {
-        console.log(response);
-        console.log(response.name);
         $(".userName").append("<h2>Welcome " + response.name + "</h2>")
     });
 
@@ -29,12 +26,10 @@ $(document).ready(function() {
         let newContentCol1 = $("<div class = 'col-sm-6'>");
         let dropdown = $("<select class='payPeriodMenu' >");
         let startDay = moment().subtract(3, "months").day("Friday").format("MM-DD-YYYY");
-        console.log(startDay);
         while (moment('"' + startDay + '"').isBefore(moment())) {
-            dropdown.append("<option value='" + startDay + "'>" + startDay + "</option>");
+            dropdown.append("<option value='" + startDay + "'>Week of : " + startDay + "</option>");
             startDay = moment('"' + startDay + '"').add(7, "d").format("MM-DD-YYYY")
         }
-        console.log(startDay);
         dateSubmit.append("Get hours for selected dates");
         newContentCol.append(datePicker1);
         newContentCol.append("<h4>Start Date</h4>");
@@ -64,7 +59,6 @@ $(document).ready(function() {
         let date1 = $("#datepicker1").val();
         let date2 = $("#datepicker2").val();
         let objToSend = {date1: date1, date2: date2};
-        console.log(objToSend);
         $.post("/api/gethours", objToSend, function (response) {
             emptyContentDiv()
             if (response[0].id === undefined) {
