@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-    var Hours = sequelize.define("Hour", {
+    let Hours = sequelize.define("Hour", {
       timein: DataTypes.DATE,
       timeout: DataTypes.DATE,
      });

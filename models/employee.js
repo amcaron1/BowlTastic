@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-  var Employee = sequelize.define("Employee", {
+  let Employee = sequelize.define("Employee", {
     name: {type: DataTypes.STRING, allowNull:false},
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
