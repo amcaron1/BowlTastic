@@ -3,6 +3,29 @@
 /* index.html */
 
 /* employee.html */
+
+h1.title {
+    font-family: 'Domine', serif;
+    text-align: center;
+}
+
+button.btn.btn-danger.clockin {
+background-color: #1b3459;
+}
+
+button.btn.btn-danger.hoursInfo {
+    background-color: #1b3459;
+}
+button.btn.btn-info.dateSubmit {
+    background-color: #1b3459;
+}
+
+
+
+
+
+
+
 /* body {
     background-color: blue;
 } */
