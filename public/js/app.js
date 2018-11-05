@@ -97,4 +97,48 @@ $(document).ready(function() {
         })
 
     });
+
+    $(".timeoff").on("click", function(){
+        emptyContentDiv()
+        let newContent = $("<div class= 'row'>");
+        let newContentCol = $("<div class = 'col-sm-6'>");
+        let datePicker1 = $("<input class = 'startdate' id='datepicker1' width='276' />");
+        let datePicker2 = $("<input class = 'enddate' id='datepicker2' width='276' />");
+        let dateSubmit = $("<button class='btn btn-info vacationSubmit'>");
+        dateSubmit.append("Submit date range for vacation");
+        newContentCol.append(datePicker1);
+        newContentCol.append("<h4>Start Date</h4>");
+        newContentCol.append(datePicker2);
+        newContentCol.append("<h4>End Date</h4>");
+        newContentCol.append(dateSubmit);
+        newContent.append(newContentCol);
+        $(".contentDiv").append(newContent);
+
+        $('#datepicker1').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    })
+
+    $(document).on("click",".vacationSubmit", function(){
+        let date1 = $("#datepicker1").val();
+        let date2 = $("#datepicker2").val();
+        let objToSend = {date1: date1, date2: date2};
+        $.post("/api/timeoff", objToSend, function(response){
+            $(".contentDiv").empty()
+            $(".contentDiv").append("<h2>Your request for "+moment(response.start_date, "YYYY-MM-DD").format("MM-DD-YYYY")+" through "+moment(response.end_date, "YYYY-MM-DD").format("MM-DD-YYYY")+" had been submitted, you will be emailed when the manager has reviewed your request.")
+            console.log(response)
+        })
+    })
+
+    $.get("/managercheck", function(response){
+        if(response == 1){
+            $(".btnappend").append("<a href ='/manager'><button class='btn btn-warning'>Manager Page</button></a>")
+
+            }
+        })
+
+
 });

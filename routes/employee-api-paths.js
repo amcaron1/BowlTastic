@@ -10,11 +10,22 @@ module.exports = function(app) {
     })
 
   });
+
   app.get("/api/currentuser", function(req,res){
     db.Employee.findOne({where:{id:req.user.id}}).then(user=>{
       res.json(user)
     })
   });
+
+  app.get("/managercheck", function(req,res){
+      if(req.user.manager == 1){
+          res.send("1")
+      }
+      else{
+          res.send("1")
+      }
+  })
+
 
   app.get("/api/employees/:id", function(req, res) {
 
