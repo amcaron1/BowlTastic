@@ -20,6 +20,7 @@ app.use(passport.session())
 require('./config/passport.js')(passport);
 
 // Routes
+require("./routes/payroll.js")(app);
 app.use("/", auth)
 require("./routes/employee-api-paths")(app);
 require("./routes/hours-api-paths")(app);
