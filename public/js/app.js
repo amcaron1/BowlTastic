@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    const timeformat = "YYYY-MM-DD HH:mm:ss"
     let emptyContentDiv = function () {
         $(".contentDiv").empty()
     };
@@ -80,11 +80,12 @@ $(document).ready(function() {
                 newContent.append(newContentCol);
                 $(".contentDiv").append(newContent);
                 let durations = [];
+                console.log(response)
                 for (let i in response) {
                     let tableRow = $("<tr>");
-                    tableRow.append("<td>"+moment(response[i].createdAt).format('MM-DD-YYYY')+"</td>");
-                    tableRow.append("<td>"+moment(response[i].timein).format('hh:mm A')+"</td>");
-                    tableRow.append("<td>"+moment(response[i].timeout).format('hh:mm A')+"</td>");
+                    tableRow.append("<td>"+moment(response[i].timein, timeformat).format('MM-DD-YYYY')+"</td>");
+                    tableRow.append("<td>"+moment(response[i].timein, timeformat).format('hh:mm A')+"</td>");
+                    tableRow.append("<td>"+moment(response[i].timeout, timeformat).format('hh:mm A')+"</td>");
                     tableRow.append("<td>"+moment.utc(moment(response[i].timeout,'YYYY-MM-DD HH:mm:ss').diff(moment(response[i].timein,'YYYY-MM-DD HH:mm:ss'))).format('HH:mm')+"</td>");
                     $(".hoursTable").append(tableRow);
                     durations.push(moment.utc(moment(response[i].timeout,'YYYY-MM-DD HH:mm:ss').diff(moment(response[i].timein,'YYYY-MM-DD HH:mm:ss'))).format('HH:mm:ss'))
@@ -92,7 +93,8 @@ $(document).ready(function() {
                 const totalDurations = durations.slice(1)
                     .reduce((prev, cur) => moment.duration(cur).add(prev),
                         moment.duration(durations[0]))
-                $(".contentDiv").append("<h2> Total Hours for this time selection : "+moment.utc(totalDurations.asMilliseconds()).format("HH:mm"+"</h2>"))
+                    console.log(moment.utc(totalDurations.asMilliseconds()))
+                $(".contentDiv").append("<h2> Total Hours for this time selection : "+(((moment.utc(totalDurations.asMilliseconds())/1000)/60)/60).toFixed(2)+"</h2>")
             }
         })
 
@@ -134,6 +136,7 @@ $(document).ready(function() {
     })
 
     $.get("/managercheck", function(response){
+        console.log(response)
         if(response == 1){
             $(".btnappend").append("<a href ='/manager'><button class='btn btn-warning'>Manager Page</button></a>")
 
