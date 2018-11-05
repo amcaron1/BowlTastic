@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {type: DataTypes.STRING, allowNull:false},
     start_date: DataTypes.DATEONLY,
     end_date: DataTypes.DATEONLY,
+    manager: DataTypes.BOOLEAN,
     email:  {
       type: DataTypes.STRING,
       validate: {isEmail: true,}
@@ -18,6 +19,9 @@ module.exports = function(sequelize, DataTypes) {
   Employee.associate = function(models) {
 
     Employee.hasMany(models.Hour, {
+      onDelete: "cascade"
+    });
+    Employee.hasMany(models.Timeoff, {
       onDelete: "cascade"
     });
     Employee.hasOne(models.Jobs, {

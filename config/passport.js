@@ -13,11 +13,12 @@ module.exports = function(passport) {
   passport.use(new localStrategy(function(username,password,done){
     console.log(username,password)
     db.Employee.findOne({where:{username:username}}).then(user=>{
+        console.log(user.manager)
       if(user==null){done(null)}
       else{
         if(user){
           if (password == user.password){
-          done(null,{username:user.username,id:user.id})
+          done(null,{username:user.username,id:user.id, manager:user.manager})
           }
           else{
             done(null,false)
