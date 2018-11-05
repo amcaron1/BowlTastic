@@ -69,7 +69,7 @@ module.exports = {
     }, {
       employeeId: 8, 
       pay_rate: 16.00, 
-      end_date: 2018-11-02
+      end_date: '2018-11-02'
     }, {
       employeeId: 9, 
       pay_rate: 16.00

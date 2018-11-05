@@ -7,6 +7,7 @@ module.exports = {
         email: 'Jimmy@email.com',
         username: "jimmy", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -15,6 +16,7 @@ module.exports = {
         email: 'Reed@email.com',
         username: "reed", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -23,6 +25,7 @@ module.exports = {
         email: 'Rachel@email.com',
         username: "rachel", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -31,6 +34,7 @@ module.exports = {
         email: 'Minnie@email.com',
         username: "minnie", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -39,6 +43,7 @@ module.exports = {
         email: 'Thomas@email.com',
         username: "jimmy", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -47,6 +52,7 @@ module.exports = {
         email: 'Charlie@email.com',
         username: "charlie", 
         password: 'password',
+        manager: true,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -55,6 +61,7 @@ module.exports = {
         email: 'Kaitlyn@email.com',
         username: "kaitlyn", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -64,6 +71,7 @@ module.exports = {
         email: 'Tia@email.com',
         username: "tia", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -72,6 +80,7 @@ module.exports = {
         email: 'Joan@email.com',
         username: "joan", 
         password: 'password',
+        manager: false,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }, {
@@ -80,6 +89,7 @@ module.exports = {
         email: 'Britney@email.com',
         username: "britney", 
         password: 'password',
+        manager: true,
         createdAt: new Date(), 
         updatedAt: new Date(),
       }])
