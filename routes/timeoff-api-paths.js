@@ -13,7 +13,14 @@ module.exports = function(app) {
 
       })
   })
-  app.put("/api/confirm/:requestid/:bool")
+  app.post("/api/confirm/:requestid/:bool", function(){
+      let id = req.params.requestid;
+      let bool = req.params.bool;
+      db.Timeoff.update({approved:bool},{where:{id:id}})
+  })
 
+  app.get("/api/timeoffrequests", function(req,res){
+      db.Timeoff.findAll({where:{approved:NULL}})
+  })
 
 };
