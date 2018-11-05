@@ -46,12 +46,17 @@ align-content: center;
     margin-top:10px !important;
   }
 
-.managerTable {
+#managerDisplay {
    margin-top:10px !important;
   }
 
+.employeeTable {
+    margin-top: 10px;
+}
+
 .addedButton {
     margin-right: 5px;
+    margin-top: 10px;
 }
 
 table {
