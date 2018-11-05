@@ -70,20 +70,26 @@
 
     function displayEmployees() {
 
+        let addedButtonDiv = $("<div>");
+            addedButtonDiv.attr("id", "addedButtonDiv");
+            addedButtonDiv.addClass("row button-grid text-center");
+
         let newEmployeeButton = $("<button>Add New Employee</button>");
             newEmployeeButton.attr("id", "newEmployeeButton");
-            newEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(newEmployeeButton);
+            newEmployeeButton.addClass("btn btn-primary col-sm-3 addedButton mx-auto")
+        $(addedButtonDiv).append(newEmployeeButton);
 
         let updateEmployeeButton = $("<button>Update Employee</button>");
             updateEmployeeButton.attr("id", "updateEmployeeButton");
-            updateEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(updateEmployeeButton);
+            updateEmployeeButton.addClass("btn btn-primary col-sm-3 addedButton mx-auto")
+        $(addedButtonDiv).append(updateEmployeeButton);
 
         let removeEmployeeButton = $("<button>Remove Employee</button>");
             removeEmployeeButton.attr("id", "removeEmployeeButton");
-            removeEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(removeEmployeeButton);
+            removeEmployeeButton.addClass("btn btn-primary col-sm-3 addedButton mx-auto")
+        $(addedButtonDiv).append(removeEmployeeButton);
+
+        $("#managerDisplay").append(addedButtonDiv);
 
         let employeeTable = $("<table>");
             employeeTable.addClass("table table-hover managerTable");
@@ -112,6 +118,7 @@
                 newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
                 newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
                 newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
+                newEmployeeForm.append("<button class='btn btn-primary' id='employeeCancel'>Cancel</button>")
             newEmployeeForm.append("</form>");
         
         $("#managerDisplay").empty();
@@ -140,6 +147,56 @@
             console.log(response);
         });
 
+        $("#managerDisplay").empty();
+        displayEmployees();
+    });
+
+    //Update Employee button
+    $(document).on("click","#updateEmployeeButton",function() {
+    event.preventDefault();
+    
+    let newEmployeeForm = $("<div>");
+        newEmployeeForm.append("<form>");
+            newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='ID of Employee you want to update'>")
+            newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='Name'>")
+            newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
+            newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
+            newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
+            newEmployeeForm.append("<button class='btn btn-primary' id='employeeCancel'>Cancel</button>")
+        newEmployeeForm.append("</form>");
+    
+    $("#managerDisplay").empty();
+    $("#managerDisplay").append(newEmployeeForm);
+
+    });
+
+
+
+
+    //Update Employee button
+    $(document).on("click","#removeEmployeeButton",function() {
+        event.preventDefault();
+    
+        let newEmployeeForm = $("<div>");
+            newEmployeeForm.append("<form>");
+                newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='ID of Employee you want to remove'>")
+                newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='Name'>")
+                newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
+                newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
+                newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
+                newEmployeeForm.append("<button class='btn btn-primary' id='employeeCancel'>Cancel</button>")
+            newEmployeeForm.append("</form>");
+    
+        $("#managerDisplay").empty();
+        $("#managerDisplay").append(newEmployeeForm);
+
+    });
+
+    //Employee Cancel button
+    $(document).on("click","#employeeCancel",function() {
+        event.preventDefault();
+        $("#managerDisplay").empty();
+        displayEmployees();
     });
 
     //Payroll button

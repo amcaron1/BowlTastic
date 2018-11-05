@@ -49,7 +49,12 @@ align-content: center;
 .managerTable {
    margin-top:10px !important;
   }
-  table {
+
+.addedButton {
+    margin-right: 5px;
+}
+
+table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
