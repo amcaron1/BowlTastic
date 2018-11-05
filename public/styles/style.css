@@ -4,9 +4,25 @@
 
 /* employee.html */
 
+div.thisisbackground {
+  background-color: white;
+}
+
 h1.title {
     font-family: 'Domine', serif;
     text-align: center;
+   opacity: 0.5;
+   
+ font-size: 35px;
+
+color: black;
+
+width: 200px;
+
+text-decoration: underline;
+margin-left: auto;
+margin-right: auto;
+margin-top: 20px;
 }
 
 button.btn.btn-danger.clockin {
@@ -35,6 +51,7 @@ background-image: linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%);
 background-size: 20px 20px;
 height: 150px;
 overflow: visible;
+text-shadow: 4px 8px 6px rgba(0,0,0,0.3);
 
 }
 
@@ -89,12 +106,12 @@ overflow: visible;
 /* html {
     background-color: #909598;
 } */
-
+/* 
 h1.title {
 
     font-size: 80px;
 
-}
+} */
 
 .margintwenty {
     margin-top: 40px;
