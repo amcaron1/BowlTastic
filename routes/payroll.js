@@ -71,7 +71,7 @@ module.exports = function(app) {
 
           transporter.sendMail({
             from: 'bowltastic@gmail.com',
-            to: 'amcaron1@msn.com',
+            to: email,
             subject: 'Bowltastic Payment Stub for ' + period,
             text: message
           });
