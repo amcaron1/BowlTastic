@@ -8,8 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./js/index.js"></script>
+
 </head>
 <body>
 
@@ -28,7 +27,7 @@
                         <button type="button" id="employeeListButton" class="btn btn-primary">Employee List</button>
                     </div>
                     <div class="col-sm-6 text-center button-grid">
-                        <button type="button" id="payrollButton" class="btn btn-primary">Payroll</button>
+                        <button type="button" id="timeoffRequestButton" class="btn btn-primary">Timeoff Requests</button>
                     </div>
                 </div>
 
@@ -57,141 +56,6 @@
 </body>
 </html>
 
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./js/manager.js"></script>
 
-    //Employee List button
-    $("#employeeListButton").on("click",function() {
-        event.preventDefault();
-        
-        $("#managerDisplay").empty();
-        
-        displayEmployees();
-    });
-
-    function displayEmployees() {
-
-        let newEmployeeButton = $("<button>Add New Employee</button>");
-            newEmployeeButton.attr("id", "newEmployeeButton");
-            newEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(newEmployeeButton);
-
-        let updateEmployeeButton = $("<button>Update Employee</button>");
-            updateEmployeeButton.attr("id", "updateEmployeeButton");
-            updateEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(updateEmployeeButton);
-
-        let removeEmployeeButton = $("<button>Remove Employee</button>");
-            removeEmployeeButton.attr("id", "removeEmployeeButton");
-            removeEmployeeButton.addClass("btn btn-primary")
-        $("#managerDisplay").append(removeEmployeeButton);
-
-        let employeeTable = $("<table>");
-            employeeTable.addClass("table table-hover managerTable");
-                employeeTable.append("<tr>");
-                    employeeTable.append("<th>Employee ID</th>");
-                    employeeTable.append("<th>Name</th>");
-                    employeeTable.append("<th>Start Date</th>");
-                    employeeTable.append("<th>End Date</th>");
-                employeeTable.append("</tr>")
-        //add a for loop to append all employee objects in as a new table row
-
-        $.get("/api/employees", function(req, response) {
-            console.log(response);
-        });
-
-        $("#managerDisplay").append(employeeTable);
-    };
-
-    //add new employee button
-    $(document).on("click","#newEmployeeButton",function() {
-        event.preventDefault();
-        
-        let newEmployeeForm = $("<div>");
-            newEmployeeForm.append("<form>");
-                newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='Name'>")
-                newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
-                newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
-                newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
-            newEmployeeForm.append("</form>");
-        
-        $("#managerDisplay").empty();
-        $("#managerDisplay").append(newEmployeeForm);
-
-    });
-
-    //New submit employee button
-    $(document).on("click","#newEmployeeSubmit",function() {
-        event.preventDefault();
-        
-        let postName = $("#newName").val().trim();
-        let postUsername = $("#newUsername").val().trim();
-        let postPassword = $("#newPassword").val().trim();
-
-        let newEmployee =
-            {
-                name: postName,
-                username: postUsername,
-                password: postPassword
-            }
-
-            console.log(newEmployee);
-
-        $.post("/api/employees", newEmployee, function(response) {
-            console.log(response);
-        });
-
-    });
-
-    //Payroll button
-    $("#payrollButton").on("click",function() {
-        event.preventDefault();
-
-        //Figure out what data will be available to display with this button.
-        $("#managerDisplay").empty();
-    });
-
-    //Employee Timeclock button
-    $("#timeclockButton").on("click",function() {
-        event.preventDefault();
-        
-        $("#managerDisplay").empty();
-
-        let timeclockTable = $("<table>");
-            timeclockTable.addClass("table table-hover managerTable");
-            timeclockTable.append("<tr>");
-                timeclockTable.append("<th>Employee ID</th>");
-                timeclockTable.append("<th>Name</th>");
-                timeclockTable.append("<th>Date</th>");
-                timeclockTable.append("<th>Time In</th>");
-                timeclockTable.append("<th>Time Out</th>");
-            timeclockTable.append("</tr>");
-
-        //For loop to append objects from database as a new table row
-
-        $("#managerDisplay").append(timeclockTable);
-
-    });
-
-    //Current employee roles button
-    $("#rolesButton").on("click",function() {
-        event.preventDefault();
-        
-        $("#managerDisplay").empty();
-
-        let rolesTable = $("<table>");
-            rolesTable.addClass("table table-hover managerTable");
-            rolesTable.append("<tr>");
-                rolesTable.append("<th>Employee ID</th>");
-                rolesTable.append("<th>Name</th>");
-                rolesTable.append("<th>Job Title</th>");
-                rolesTable.append("<th>Job ID</th>");
-                rolesTable.append("<th>Date Started</th>");
-                rolesTable.append("<th>Date Ended</th>");
-            rolesTable.append("</tr>");
-
-        //For loop to append objects from database as a new table row
-
-        $("#managerDisplay").append(rolesTable);
-
-    });
-</script>
