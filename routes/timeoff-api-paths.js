@@ -3,6 +3,9 @@ var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const moment = require("moment");
 
+// Needed for raw sequelize commands
+var sequelize  = db.sequelize
+
 
 module.exports = function(app) {
   app.post("/api/timeoff", function(req,res){
@@ -26,9 +29,10 @@ module.exports = function(app) {
   })
 
   app.get("/api/timeoffrequests", function(req,res){
-      db.Timeoff.findAll({where:{approved:NULL}}).then(results=>{
-          res.json(results)
-      })
+    sequelize.query("SELECT timeoffs.id, timeoffs.start_date, timeoffs.end_date,employees.name FROM timeoffs LEFT JOIN employees ON timeoffs.EmployeeId = employees.id WHERE timeoffs.approved IS NULL", {type: sequelize.QueryTypes.SELECT})
+        .then(function(results) {
+            res.json(results)
+        })
 
   })
 

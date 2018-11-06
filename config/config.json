@@ -1,10 +1,11 @@
 
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "bowl",
-    "host": "localhost",
+    "username": "o4ihom3p1by09lkh",
+    "password": "mo6s573pf4yw0cv3",
+    "database": "db1zizaekvvaf7c7",
+    "host": "tj5iv8piornf713y.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
