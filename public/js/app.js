@@ -22,7 +22,7 @@ $(document).ready(function() {
         let newContentCol = $("<div class = 'col-sm-6'>");
         let datePicker1 = $("<input class = 'startdate' id='datepicker1' width='276' />");
         let datePicker2 = $("<input class = 'enddate' id='datepicker2' width='276' />");
-        let dateSubmit = $("<button class='btn btn-info dateSubmit'>");
+        let dateSubmit = $("<button class='btn btn-primary dateSubmit'>");
         let newContentCol1 = $("<div class = 'col-sm-6'>");
         let dropdown = $("<select class='payPeriodMenu' >");
         let startDay = moment().subtract(3, "months").day("Friday").format("MM-DD-YYYY");
@@ -106,7 +106,7 @@ $(document).ready(function() {
         let newContentCol = $("<div class = 'col-sm-6'>");
         let datePicker1 = $("<input class = 'startdate' id='datepicker1' width='276' />");
         let datePicker2 = $("<input class = 'enddate' id='datepicker2' width='276' />");
-        let dateSubmit = $("<button class='btn btn-info vacationSubmit'>");
+        let dateSubmit = $("<button class='btn btn-primary vacationSubmit'>");
         dateSubmit.append("Submit date range for vacation");
         newContentCol.append(datePicker1);
         newContentCol.append("<h4>Start Date</h4>");
