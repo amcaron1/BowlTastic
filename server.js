@@ -23,11 +23,10 @@ require('./config/passport.js')(passport);
 
 require("./routes/payroll.js")(app);
 app.use("/", auth)
-
+require("./routes/timeoff-api-paths")(app);
 require("./routes/employee-api-paths")(app);
 require("./routes/hours-api-paths")(app);
 require("./routes/htmlRoutes")(app);
-require("./routes/timeoff-api-paths")(app);
 
 var syncOptions = { force: false };
 
