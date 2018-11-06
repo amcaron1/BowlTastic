@@ -249,3 +249,62 @@ margin-top: 60px;
 }
 
 }}
+@media screen and (min-width: 600px) {
+div.jumbotron.jumbotron-fluid.primary.white {
+    margin-left:90px;
+    margin-right:90px;
+    height: 40px;
+    padding-bottom: 120px;
+    padding-top: 40px;
+    background-color: white;
+    width: 500px;
+   
+}
+}
+@media screen and (min-width: 600px) {
+h1.display-4 {
+    font-size: 55px;
+    font-family: 'Hind', sans-serif;
+   
+    margin-left: 210px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black;
+    
+   
+}
+}
+
+@media screen and (min-width: 600px) {
+form.col-md-5 {
+margin-left: 250px;
+margin-top: -70px;
+}
+}
+
+@media screen and (min-width: 600px) {
+   input.btn.secondary.white { 
+background-color:#1b3459;
+color: white;
+}
+    }
+
+    @media screen and (min-width: 600px) {
+        a.btn.btn-link { 
+            background-color:#1b3459;
+            color: white;
+            }
+         }
+         @media screen and (min-width: 600px) {
+            input.btn.secondary.white:hover { 
+         background-color:#8C9AAB;;
+         color: white;
+         }
+             }
+
+             @media screen and (min-width: 600px) {
+                a.btn.btn-link:hover { 
+                    background-color:#8C9AAB;
+                    color: white;
+                    }
+                 }   
