@@ -28,7 +28,7 @@ module.exports = function(app) {
       if(req.user.manager) {
           let id = req.params.requestid;
           let bool = req.params.bool;
-          
+
           db.Timeoff.update({approved: bool}, {where: {id: id}})
           .then(results =>{
 
