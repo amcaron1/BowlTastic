@@ -205,8 +205,7 @@ function timeclockPullNames() {
         $("#employeeSelectGo").on("click",function() {
             $("#timeclockTable").remove();
 
-            let selectedId = $("#employeeSelectMenu").val()   
-            // $("#managerDisplay").append("<h4>"+idName+"<h4>")
+            let selectedId = $("#employeeSelectMenu").val()
 
             let timeclockTable = $("<table id='timeclockTable'>");
                 timeclockTable.addClass("table table-hover employeeTable");
@@ -243,7 +242,7 @@ function timeclockPullNames() {
     };
 
 //Current employee roles button
-$("#rolesButton").on("click",function() {
+$(document).on("click", "#rolesButton", function() {
     event.preventDefault();
     
     $("#managerDisplay").empty();
@@ -251,12 +250,28 @@ $("#rolesButton").on("click",function() {
         rolesTable.addClass("table table-hover employeeTable");
         rolesTable.append("<tr>");
             rolesTable.append("<th>Employee ID</th>");
-            rolesTable.append("<th>Name</th>");
             rolesTable.append("<th>Job Title</th>");
-            rolesTable.append("<th>Job ID</th>");
             rolesTable.append("<th>Date Started</th>");
             rolesTable.append("<th>Date Ended</th>");
         rolesTable.append("</tr>");
-    //For loop to append objects from database as a new table row
+
+        $.get("/api/jobs/").then(response => {
+
+            for (i=0;i<response.length;i++) {
+                rolesTable.append("<tr>");
+                    rolesTable.append("<td>"+response[i].id+"</td>");
+                    rolesTable.append("<td>"+response[i].title+"</td>");
+                    rolesTable.append("<td>"+response[i].start_date+"</td>");
+
+                    if (response[i].end_date === null) {
+                        rolesTable.append("<td>Active</td>");
+                    }
+                    else {
+                        rolesTable.append("<td>"+response[i].end_date+"</td>");
+                    }
+                rolesTable.append("</tr>");
+            }
+        });
+
     $("#managerDisplay").append(rolesTable);
 });

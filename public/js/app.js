@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 
     $.ajax({url: "/api/currentuser", method: "GET"}).then(response => {
-        $(".userName").append("<h2>Welcome " + response.name + "</h2>")
+        $("#userName").append("<h3>Welcome " + response.name + "</h3>")
     });
 
     $(".hoursInfo").on("click", function () {
@@ -138,7 +138,7 @@ $(document).ready(function() {
     $.get("/managercheck", function(response){
         console.log(response)
         if(response == 1){
-            $(".btnappend").append("<a href ='/manager'><button class='btn btn-warning'>Manager Page</button></a>")
+            $("#makeButton").append("<a href ='/manager' class='btn btn-warning' id='switchToManagerView'>Manager Page</a>")
 
             }
         })
