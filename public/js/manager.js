@@ -1,4 +1,5 @@
 
+
 //Employee List button
 $("#employeeListButton").on("click",function() {
     event.preventDefault();
@@ -275,3 +276,70 @@ $(document).on("click", "#rolesButton", function() {
 
     $("#managerDisplay").append(rolesTable);
 });
+
+//Timeoff button
+
+function displayTimeoff() {
+
+    var timeoffTable = $("<table>");
+    timeoffTable.addClass("table table-hover managerTable");
+    timeoffTable.append("<tr>");
+    timeoffTable.append("<th>Name</th>");
+    timeoffTable.append("<th>Start Date</th>");
+    timeoffTable.append("<th>End Date</th>");
+    timeoffTable.append("<th>Approved</th>");
+    timeoffTable.append("<th>Denied</th>");
+    timeoffTable.append("</tr>");
+
+    $.get("/api/requests", function(results) {
+        console.log("hit client route")
+        // Loops through the results array
+        for (var i = 0; i < results.length; i++) {
+
+            // Converts date
+            var start_dateConverted = moment(results[i].start_date).format("MM/DD/YYYY");
+            var end_dateConverted = moment(results[i].end_date).format("MM/DD/YYYY");
+
+            timeoffTable.append("<tr>");
+            timeoffTable.append("<td>" + results[i].name + "</td>");
+            timeoffTable.append("<td>" + start_dateConverted + "</td>");
+            timeoffTable.append("<td>" + end_dateConverted + "</td>");
+            timeoffTable.append('<td><button type="button" class="btn btn-success approved" id=' + results[i].id + '>&#9989</button></td>')
+            timeoffTable.append('<td><button type="button" class="btn btn-success denied" id='+ results[i].id + '>&#10060</button></td>')
+            timeoffTable.append("<tr>");
+        }
+        console.log(results);
+    })
+    $("#managerDisplay").append(timeoffTable);
+}
+
+$("#timeoffButton").on("click",function() {
+    console.log("timeoffButton");
+    event.preventDefault();
+
+    $("#managerDisplay").empty();
+    
+    displayTimeoff();
+});
+
+$(document).on("click", ".approved" ,function() {
+    event.preventDefault();
+
+    $.post("/api/confirm/"+$(this).attr("id")+"/1", function(response){
+
+    })
+    $("#managerDisplay").empty();
+    displayTimeoff();
+});
+
+$(document).on("click", ".denied" ,function() {
+    event.preventDefault();
+
+    var objToSend = {id: $(this).attr("id"), answer: 0};
+    $.post("/api/confirm/"+$(this).attr("id")+"/0", function(response){
+
+    })
+    $("#managerDisplay").empty();
+    displayTimeoff();
+});
+

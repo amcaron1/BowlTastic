@@ -10,12 +10,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    
 </head>
 <body>
-
-
 
 
                 <div class="thisisbackground">
@@ -113,77 +111,10 @@
         </div>
     </div>
 
+    <script src="./js/manager.js"></script>
 
 </body>
+
 </html>
 
 
-
-
-<script>
- //Timeoff button
-    $("#timeoffButton").on("click",function() {
-        event.preventDefault();
-
-        $("#managerDisplay").empty();
-
-
-        displayTimeoff();
-    });
-
-    function displayTimeoff() {
-
-        var timeoffTable = $("<table>");
-        timeoffTable.addClass("table table-hover managerTable");
-        timeoffTable.append("<tr>");
-        timeoffTable.append("<th>Name</th>");
-        timeoffTable.append("<th>Start Date</th>");
-        timeoffable.append("<th>End Date</th>");
-        timeoffTable.append("<th>Approved</th>");
-        timeoffTable.append("<th>Denied</th>");
-        timeoffTable.append("</tr>");
-
-        $.get("/api/timeoffRequests", function(req, results) {
-
-            // Loops through the results array
-            for (var i = 0; i < results.length; i++) {
-
-                // Converts date
-                var start_dateConverted = moment(results[i].start_date).format("MM/DD/YYYY");
-                var end_dateConverted = moment(results[i].end_date).format("MM/DD/YYYY");
-
-                timeoffTable.append("<tr>");
-                timeoffTable.append("<td>" + results[i].name + "</td>");
-                timeoffTable.append("<td>" + start_dateConverted + "</td>");
-                timeoffTable.append("<td>" + end_dateConverted + "</td>");
-                timeoffTable.append('<td><button type="button" class="btn btn-success approved" id=' + reuslts[i].id + '>&#9989</button></td>')
-                timeoffTable.append('<td><button type="button" class="btn btn-success denied" id='+ reuslts[i].id + '>&#10060</button></td>')
-                timeoffTable.append("<tr>");
-            }
-            console.log(results);
-        })
-        $("#managerDisplay").append(timeoffTable);
-    };
-
-    $(".approved").on("click",function() {
-        event.preventDefault();
-
-        var objToSend = {id: $(this).attr("id"), answer: 1};
-        $.post("/api/timeoff/requests", objToSend, function(response){
-
-        })
-    });
-
-    $(".denied").on("click",function() {
-        event.preventDefault();
-
-        var objToSend = {id: $(this).attr("id"), answer: 0};
-        $.post("/api/timeoff/requests", objToSend, function(response){
-
-        })
-
-    });
-    </script>
-
-
-<script src="./js/manager.js"></script>
