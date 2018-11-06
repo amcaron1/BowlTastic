@@ -1,12 +1,8 @@
-
-
-/* index.html */
-
 /* employee.html */
-
+@media screen and (min-width: 600px){
 .switchToEmployeeView {
     align-content: right;
-}
+}}
 
 @media screen and (min-width: 600px){
 div.thisisbackground {
@@ -30,9 +26,7 @@ margin-top: 2px;
 }
 @media screen and (min-width: 600px){
 div.buttons {
-    align-content: center;
-    margin-left: 60px;
-    margin-right: auto;
+    margin-left: auto;
     margin-top: 50px;
   
 }
@@ -126,33 +120,7 @@ margin-right: -120px;
     100% { transform: translateY(0); }
   }
   
-  /*   animation-name: bowl;
-    animation-duration: 3s;
-    animation-iteration-count: 1/infinite; 
-    animation-timing-function: ease/ease-in/ease-out/ease-in-out/linear
-    animation-delay: s
-    animation-fill-mode: none/backwards/forwards/both
-    
-  */
 
-
-
-
-
-
-/* body {
-    background-color: blue;
-} */
-
-/* html {
-    background-color: #909598;
-} */
-/* 
-h1.title {
-
-    font-size: 80px;
-
-} */
 @media screen and (min-width: 600px) {
 .margintwenty {
     margin-top: 40px;
@@ -162,17 +130,7 @@ h1.title {
 }
 }
 
-/* button {
-    font-size: 20px;
-    background-color: red;
-    color: white;
-    border: 4px solid white;
-    border-radius: 25px;
-    box-shadow: 5px 5px #888888;
-    margin-left: 100px;
-    margin-top: 100px;
 
-} */
 @media screen and (min-width: 600px){
 div.container {
 align-content: center;
@@ -181,7 +139,18 @@ align-content: center;
 }
 
 
+
 /* manager.html */
+
+.btn-primary {
+    background-color: #1b3459 !important;
+    border-color: #1b3459 !important;
+}
+
+.denied {
+    background-color: red !important;
+    border-color: red !important;
+}
 
 #switchToEmployeeView {
     align-content: right;

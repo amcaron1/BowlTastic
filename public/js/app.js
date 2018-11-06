@@ -138,7 +138,7 @@ $(document).ready(function() {
     $.get("/managercheck", function(response){
         console.log(response)
         if(response == 1){
-            $("#makeButton").append("<a href ='/manager' class='btn btn-warning' id='switchToManagerView'>Manager Page</a>")
+            $("#makeButton").append("<a href ='/manager' class='btn btn-warning' id='switchToManagerView'>Manager View</a>")
 
             }
         })
