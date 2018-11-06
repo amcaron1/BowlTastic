@@ -14,13 +14,22 @@ module.exports = function(app) {
       })
   })
   app.post("/api/confirm/:requestid/:bool", function(){
-      let id = req.params.requestid;
-      let bool = req.params.bool;
-      db.Timeoff.update({approved:bool},{where:{id:id}})
+      if(req.user.manager) {
+          let id = req.params.requestid;
+          let bool = req.params.bool;
+          db.Timeoff.update({approved: bool}, {where: {id: id}})
+      }
+      else {
+              res.status(403).end()
+      }
+
   })
 
   app.get("/api/timeoffrequests", function(req,res){
-      db.Timeoff.findAll({where:{approved:NULL}})
+      db.Timeoff.findAll({where:{approved:NULL}}).then(results=>{
+          res.json(results)
+      })
+
   })
 
 };
