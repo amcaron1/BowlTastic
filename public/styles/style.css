@@ -231,8 +231,8 @@ margin-bottom: 60px;
 
 @media screen and (min-width: 600px) {
 button#rolesButton.btn-btn {
-margin-left: 60px;
-}
+margin-left: 5px;
+
 }
 @media screen and (min-width: 600px) {
 button#employeeListButton.btn-btn {
