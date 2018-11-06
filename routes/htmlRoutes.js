@@ -12,7 +12,12 @@ module.exports = function(app) {
   });
 
   app.get("/manager", function(req, res) {
-    res.sendFile(path.join(__dirname, '../public', 'manager.html'));
+      if (req.user.manager) {
+          res.sendFile(path.join(__dirname, '../public', 'manager.html'));
+      }
+      else {
+          res.status(403).end()
+      }
   });
 
 
