@@ -28,11 +28,13 @@ module.exports = function(app) {
       if(req.user.manager) {
           let id = req.params.requestid;
           let bool = req.params.bool;
+          
           db.Timeoff.update({approved: bool}, {where: {id: id}})
           .then(results =>{
 
               res.send(results)
-              db.Timeoff.findOne({where:{id:req.params.requestid}}).then(response=>{
+              sequelize.query("SELECT Timeoffs.id, Timeoffs.start_date, Timeoffs.end_date, Employees.name Employees.email FROM Timeoffs LEFT JOIN Employees ON Timeoffs.EmployeeId = Employees.id WHERE Employees.id =" + req.params.requestid, {type: sequelize.QueryTypes.SELECT})
+              .then(response=>{
                   console.log(req.params.requestid)
                   console.log(response.dataValues)
               if (response.dataValues.approved) {
@@ -70,7 +72,7 @@ module.exports = function(app) {
   })
 
   app.get("/api/requests", function(req,res){
-    sequelize.query("SELECT Timeoffs.id, Timeoffs.start_date, Timeoffs.end_date,Employees.name FROM Timeoffs LEFT JOIN Employees ON Timeoffs.EmployeeId = Employees.id WHERE Timeoffs.approved IS NULL", {type: sequelize.QueryTypes.SELECT})
+    sequelize.query("SELECT Timeoffs.id, Timeoffs.start_date, Timeoffs.end_date, Employees.name FROM Timeoffs LEFT JOIN Employees ON Timeoffs.EmployeeId = Employees.id WHERE Timeoffs.approved IS NULL", {type: sequelize.QueryTypes.SELECT})
         .then(function(results) {
             console.log('app.get("/api/timeoffrequests');
             res.json(results)
