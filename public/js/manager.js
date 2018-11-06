@@ -187,13 +187,15 @@ $(document).on("click", "#timeclockButton", function() {
 
 function timeclockPullNames() {
     $.get("/api/employees").then(response => {
-        let employeeSelectDropdown = $("<select id=employeeSelectDropdown>");
+        let employeeSelectDropdown = $("<select id=employeeSelectMenu>");
 
             for (i=0;i<response.length;i++) {
                 let idName = response[i].id+". "+response[i].name;
 
                 employeeSelectDropdown.append("<option value='"+response[i].id+"'>"+idName+"</option>");
             }
+
+            
 
             employeeSelectDropdown.append("</select>");
 
@@ -203,32 +205,42 @@ function timeclockPullNames() {
         $("#employeeSelectGo").on("click",function() {
             $("#timeclockTable").remove();
 
+            let selectedId = $("#employeeSelectMenu").val()   
+            // $("#managerDisplay").append("<h4>"+idName+"<h4>")
+
             let timeclockTable = $("<table id='timeclockTable'>");
                 timeclockTable.addClass("table table-hover employeeTable");
                 timeclockTable.append("<tr>");
-                    timeclockTable.append("<th>Employee ID</th>");
-                    timeclockTable.append("<th>Name</th>");
                     timeclockTable.append("<th>Date</th>");
                     timeclockTable.append("<th>Time In</th>");
                     timeclockTable.append("<th>Time Out</th>");
                 timeclockTable.append("</tr>");
 
+                $.get("/api/gethours/"+selectedId).then(data => {
+
+                    if (data[0].id == undefined) {
+                    timeclockTable.append("<tr>");
+                        timeclockTable.append("<td>No Timepunches Found</td>");
+                        timeclockTable.append("<td> </td>");
+                    timeclockTable.append("</tr>");
+                    }
+
+                    else for(i=0;i<data.length;i++) {
+
+                        timeclockTable.append("<tr>");
+                            timeclockTable.append("<td>"+moment(data[i].timein, "YYYY-MM-DD HH:mm:ss").format('MM-DD-YYYY')+"</td>");
+                            timeclockTable.append("<td>"+moment(data[i].timein, "YYYY-MM-DD HH:mm:ss").format('hh:mm A')+"</td>");
+                            timeclockTable.append("<td>"+moment(data[i].timeout, "YYYY-MM-DD HH:mm:ss").format('hh:mm A')+"</td>");
+                        timeclockTable.append("</tr>");
+                    }
+
+                    $("#managerDisplay").append(timeclockTable);
+                })
+
+            });
             
-            $("#managerDisplay").append(timeclockTable);
         });
-    });
-}
-
-
-//Employee Timeclock, after selecting an employee from the dropdown
-// $(document).on("click", "#employeeSelectGo", function() {
-//     event.preventDefault();
-
-//     $("#managerDisplay").empty();
-
-
-// });
-
+    };
 
 //Current employee roles button
 $("#rolesButton").on("click",function() {
