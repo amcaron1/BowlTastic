@@ -28,7 +28,7 @@
                         <button type="button" id="employeeListButton" class="btn btn-primary">Employee List</button>
                     </div>
                     <div class="col-sm-6 text-center button-grid">
-                        <button type="button" id="payrollButton" class="btn btn-primary">Payroll</button>
+                        <button type="button" id="timeoffButton" class="btn btn-primary">Timeoff List</button>
                     </div>
                 </div>
 
@@ -102,6 +102,68 @@
         $("#managerDisplay").append(employeeTable);
     };
 
+    //Timeoff button
+    $("#timeoffButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+        
+        displayTimeoff();
+    });
+
+    function displayTimeoff() {
+
+        var timeoffTable = $("<table>");
+        timeoffTable.addClass("table table-hover managerTable");
+        timeoffTable.append("<tr>");
+        timeoffTable.append("<th>Name</th>");
+        timeoffTable.append("<th>Start Date</th>");
+        timeoffable.append("<th>End Date</th>");
+        timeoffTable.append("<th>Approved</th>");
+        timeoffTable.append("<th>Denied</th>");
+        timeoffTable.append("</tr>");
+
+        $.get("/api/timeoffRequests", function(req, results) {
+
+            // Loops through the results array
+            for (var i = 0; i < results.length; i++) {
+
+                // Converts date
+                var start_dateConverted = moment(results[i].start_date).format("MM/DD/YYYY");
+                var end_dateConverted = moment(results[i].end_date).format("MM/DD/YYYY");
+
+                timeoffTable.append("<tr>");
+                timeoffTable.append("<td>" + results[i].name + "</td>");
+                timeoffTable.append("<td>" + start_dateConverted + "</td>");
+                timeoffTable.append("<td>" + end_dateConverted + "</td>");
+                timeoffTable.append('<td><button type="button" class="btn btn-success approved" id=' + reuslts[i].id + '>&#9989</button></td>')
+                timeoffTable.append('<td><button type="button" class="btn btn-success denied" id='+ reuslts[i].id + '>&#10060</button></td>')
+                timeoffTable.append("<tr>");
+            }
+            console.log(results);
+        })
+        $("#managerDisplay").append(timeoffTable);
+    };
+
+    $(".approved").on("click",function() {
+        event.preventDefault();
+
+        var objToSend = {id: $(this).attr("id"), answer: 1};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+        
+        })
+    });
+
+    $(".denied").on("click",function() {
+        event.preventDefault();
+        
+        var objToSend = {id: $(this).attr("id"), answer: 0};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+        
+        })
+
+    });
+
     //add new employee button
     $(document).on("click","#newEmployeeButton",function() {
         event.preventDefault();
@@ -140,14 +202,6 @@
             console.log(response);
         });
 
-    });
-
-    //Payroll button
-    $("#payrollButton").on("click",function() {
-        event.preventDefault();
-
-        //Figure out what data will be available to display with this button.
-        $("#managerDisplay").empty();
     });
 
     //Employee Timeclock button
