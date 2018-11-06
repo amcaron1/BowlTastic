@@ -5,7 +5,6 @@ module.exports = function(app) {
   app.get("/api/employees", function(req, res) {
 
     db.Employee.findAll({}).then(function(dbEmployee) {
-      console.log(dbEmployee);
       res.send(dbEmployee)
     })
 
@@ -42,13 +41,14 @@ module.exports = function(app) {
   app.post("/api/employees", function(req, res) {
     console.log(req.body);
     db.Employee.create({name:req.body.name,username:req.body.username, email:req.body.email, password:req.body.password,start_date:Sequelize.fn('NOW')}).then(function(dbEmployee) {
-      res.json(dbEmployee);
+        console.log(req.body.email)
+        res.json(dbEmployee);
     });
   });
 
   app.post("/api/employees/update", function(req, res) {
     console.log(req.body);
-      var hash = bcrypt.hashSync(req.body.password, 10);
+      // var hash = bcrypt.hashSync(req.body.password, 10);
     db.Employee.update({name:req.body.name, username:req.body.username, email:req.body.email, password:hash},{where:{id:req.body.id}}).then(function(dbEmployee) {
       res.json(dbEmployee);
     });

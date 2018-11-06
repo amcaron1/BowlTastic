@@ -79,7 +79,10 @@
                         <button class="btn-btn" id="employeeListButton" class="btn btn-primary">Employee List</button>
                     </div>
                     <div class="col-sm-6 text-center button-grid">
-                        <button class="btn-btn" id="timeoffRequestButton" class="btn btn-primary">Time Off Requests</button>
+
+
+                        <button type="button" id="timeoffButton" class="btn-btn">Timeoff List</button>
+
                     </div>
                 </div>
 
@@ -108,6 +111,197 @@
 </body>
 </html>
 
+<script>
+
+    //Employee List button
+    $("#employeeListButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+        
+        displayEmployees();
+    });
+
+    function displayEmployees() {
+
+        let newEmployeeButton = $("<button>Add New Employee</button>");
+            newEmployeeButton.attr("id", "newEmployeeButton");
+            newEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(newEmployeeButton);
+
+        let updateEmployeeButton = $("<button>Update Employee</button>");
+            updateEmployeeButton.attr("id", "updateEmployeeButton");
+            updateEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(updateEmployeeButton);
+
+        let removeEmployeeButton = $("<button>Remove Employee</button>");
+            removeEmployeeButton.attr("id", "removeEmployeeButton");
+            removeEmployeeButton.addClass("btn btn-primary")
+        $("#managerDisplay").append(removeEmployeeButton);
+
+        let employeeTable = $("<table>");
+            employeeTable.addClass("table table-hover managerTable");
+                employeeTable.append("<tr>");
+                    employeeTable.append("<th>Employee ID</th>");
+                    employeeTable.append("<th>Name</th>");
+                    employeeTable.append("<th>Start Date</th>");
+                    employeeTable.append("<th>End Date</th>");
+                employeeTable.append("</tr>")
+        //add a for loop to append all employee objects in as a new table row
+
+        $.get("/api/employees", function(req, response) {
+            console.log(response);
+        });
+
+        $("#managerDisplay").append(employeeTable);
+    };
+
+    //Timeoff button
+    $("#timeoffButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+        
+        displayTimeoff();
+    });
+
+    function displayTimeoff() {
+
+        var timeoffTable = $("<table>");
+        timeoffTable.addClass("table table-hover managerTable");
+        timeoffTable.append("<tr>");
+        timeoffTable.append("<th>Name</th>");
+        timeoffTable.append("<th>Start Date</th>");
+        timeoffable.append("<th>End Date</th>");
+        timeoffTable.append("<th>Approved</th>");
+        timeoffTable.append("<th>Denied</th>");
+        timeoffTable.append("</tr>");
+
+        $.get("/api/timeoffRequests", function(req, results) {
+
+            // Loops through the results array
+            for (var i = 0; i < results.length; i++) {
+
+                // Converts date
+                var start_dateConverted = moment(results[i].start_date).format("MM/DD/YYYY");
+                var end_dateConverted = moment(results[i].end_date).format("MM/DD/YYYY");
+
+                timeoffTable.append("<tr>");
+                timeoffTable.append("<td>" + results[i].name + "</td>");
+                timeoffTable.append("<td>" + start_dateConverted + "</td>");
+                timeoffTable.append("<td>" + end_dateConverted + "</td>");
+                timeoffTable.append('<td><button type="button" class="btn btn-success approved" id=' + reuslts[i].id + '>&#9989</button></td>')
+                timeoffTable.append('<td><button type="button" class="btn btn-success denied" id='+ reuslts[i].id + '>&#10060</button></td>')
+                timeoffTable.append("<tr>");
+            }
+            console.log(results);
+        })
+        $("#managerDisplay").append(timeoffTable);
+    };
+
+    $(".approved").on("click",function() {
+        event.preventDefault();
+
+        var objToSend = {id: $(this).attr("id"), answer: 1};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+        
+        })
+    });
+
+    $(".denied").on("click",function() {
+        event.preventDefault();
+        
+        var objToSend = {id: $(this).attr("id"), answer: 0};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+        
+        })
+
+    });
+
+    //add new employee button
+    $(document).on("click","#newEmployeeButton",function() {
+        event.preventDefault();
+        
+        let newEmployeeForm = $("<div>");
+            newEmployeeForm.append("<form>");
+                newEmployeeForm.append("<input class='form-control' type='text' id='newName' placeholder='Name'>")
+                newEmployeeForm.append("<input class='form-control' type='text' id='newUsername' placeholder='Username'>")
+                newEmployeeForm.append("<input type='password' class='form-control' id='newPassword' placeholder='Password'>");
+                newEmployeeForm.append("<button class='btn btn-primary' id='newEmployeeSubmit'>Submit</button>")
+            newEmployeeForm.append("</form>");
+        
+        $("#managerDisplay").empty();
+        $("#managerDisplay").append(newEmployeeForm);
+
+    });
+
+    //New submit employee button
+    $(document).on("click","#newEmployeeSubmit",function() {
+        event.preventDefault();
+        
+        let postName = $("#newName").val().trim();
+        let postUsername = $("#newUsername").val().trim();
+        let postPassword = $("#newPassword").val().trim();
+
+        let newEmployee =
+            {
+                name: postName,
+                username: postUsername,
+                password: postPassword
+            }
+
+            console.log(newEmployee);
+
+        $.post("/api/employees", newEmployee, function(response) {
+            console.log(response);
+        });
+
+    });
+
+    //Employee Timeclock button
+    $("#timeclockButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+
+        let timeclockTable = $("<table>");
+            timeclockTable.addClass("table table-hover managerTable");
+            timeclockTable.append("<tr>");
+                timeclockTable.append("<th>Employee ID</th>");
+                timeclockTable.append("<th>Name</th>");
+                timeclockTable.append("<th>Date</th>");
+                timeclockTable.append("<th>Time In</th>");
+                timeclockTable.append("<th>Time Out</th>");
+            timeclockTable.append("</tr>");
+
+        //For loop to append objects from database as a new table row
+
+        $("#managerDisplay").append(timeclockTable);
+
+    });
+
+    //Current employee roles button
+    $("#rolesButton").on("click",function() {
+        event.preventDefault();
+        
+        $("#managerDisplay").empty();
+
+        let rolesTable = $("<table>");
+            rolesTable.addClass("table table-hover managerTable");
+            rolesTable.append("<tr>");
+                rolesTable.append("<th>Employee ID</th>");
+                rolesTable.append("<th>Name</th>");
+                rolesTable.append("<th>Job Title</th>");
+                rolesTable.append("<th>Job ID</th>");
+                rolesTable.append("<th>Date Started</th>");
+                rolesTable.append("<th>Date Ended</th>");
+            rolesTable.append("</tr>");
+
+        //For loop to append objects from database as a new table row
+
+        $("#managerDisplay").append(rolesTable);
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./js/manager.js"></script>
+
 
