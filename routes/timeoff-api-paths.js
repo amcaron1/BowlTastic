@@ -2,6 +2,14 @@ var db = require("../models");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const moment = require("moment");
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'bowltastic@gmail.com  ',
+        pass: 'umnbootcamp'
+    }
+});
 
 // Needed for raw sequelize commands
 var sequelize  = db.sequelize;
@@ -21,11 +29,43 @@ module.exports = function(app) {
           let id = req.params.requestid;
           let bool = req.params.bool;
           db.Timeoff.update({approved: bool}, {where: {id: id}})
-          .then(response =>{res.send(response)});
+          .then(results =>{
+
+              res.send(results)
+              db.Timeoff.findOne({where:{id:req.params.requestid}}).then(response=>{
+                  console.log(req.params.requestid)
+                  console.log(response.dataValues)
+              if (response.dataValues.approved) {
+                  var answer = "approved";
+              }
+              else if (!response.dataValues.approved) {
+                  var answer = "denied";
+              }
+
+              if (response.dataValues.start_date == response.dataValues.end_date) {
+                  var dates = response.dataValues.start_date;
+              }
+              else {
+                  var dates = response.dataValues.start_date + " to " + response.dataValues.end_date;
+              }
+
+              var subject = "Your absence request has been " + answer;
+              var message = "Dear Employee" + ",\n" +
+                   "Your absence request for " + dates + " has been " + answer + ".";
+
+              transporter.sendMail({
+              from: 'bowltastic@gmail.com',
+              to: "nfgrawker@gmail.com",
+              subject: subject,
+              text: message
+          })
+        });
+        });
       }
       else {
               res.status(403).end()
       }
+      // Translate results.approved into text
 
   })
 
