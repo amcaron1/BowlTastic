@@ -73,4 +73,19 @@ module.exports = function(app) {
     
         });
     });
+
+    app.get("/api/jobs/", function(req, res) {
+        db.Jobs.findAll({}).then(response=>{
+            console.log(response)
+            if (response[0] === undefined) {
+                console.log("response empty")
+                res.send('No results returned for that time period.').end();
+            }
+            else{
+                console.log("response full")
+                res.send(response);
+            }
+  
+        });
+    });
 };
