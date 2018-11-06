@@ -32,30 +32,29 @@ module.exports = function(app) {
           .then(results =>{
 
               res.send(results)
-              db.Timeoff.findOne({where:{id:req.params.requestid}}).then(response=>{
-                  console.log(req.params.requestid)
-                  console.log(response.dataValues)
-              if (response.dataValues.approved) {
+              sequelize.query("SELECT Timeoffs.id, Timeoffs.approved, Timeoffs.start_date, Timeoffs.end_date, Employees.name, Employees.email FROM Timeoffs LEFT JOIN Employees ON Timeoffs.EmployeeId = Employees.id WHERE Timeoffs.id = " + req.params.requestid, {type: sequelize.QueryTypes.SELECT}).then(response=>{
+                  console.log(response[0].email);
+              if (response[0].approved == 1) {
                   var answer = "approved";
               }
-              else if (!response.dataValues.approved) {
+              else if (response[0].approved == 0) {
                   var answer = "denied";
               }
 
-              if (response.dataValues.start_date == response.dataValues.end_date) {
-                  var dates = response.dataValues.start_date;
+              if (response[0].start_date == response[0].end_date) {
+                  var dates = response[0].start_date;
               }
               else {
-                  var dates = response.dataValues.start_date + " to " + response.dataValues.end_date;
+                  var dates = response[0].start_date + " to " + response[0].end_date;
               }
 
               var subject = "Your absence request has been " + answer;
-              var message = "Dear Employee" + ",\n" +
+              var message = response[0].name + ",\n" +
                    "Your absence request for " + dates + " has been " + answer + ".";
 
               transporter.sendMail({
               from: 'bowltastic@gmail.com',
-              to: "nfgrawker@gmail.com",
+              to: response[0].email,
               subject: subject,
               text: message
           })
