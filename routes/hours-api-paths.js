@@ -58,4 +58,34 @@ module.exports = function(app) {
         res.json(dbHours);
         });
     });
+
+    app.get("/api/gethours/:id", function(req, res) {
+        db.Hour.findAll({limit: 10, where: {EmployeeId:req.params.id},order:[ [ 'createdAt', 'DESC' ]]}).then(response=>{
+            console.log(response)
+            if (response[0] === undefined) {
+                console.log("response empty")
+                res.send('No results returned for that time period.').end();
+            }
+            else{
+                console.log("response full")
+                res.send(response);
+            }
+    
+        });
+    });
+
+    app.get("/api/jobs/", function(req, res) {
+        db.Jobs.findAll({}).then(response=>{
+            console.log(response)
+            if (response[0] === undefined) {
+                console.log("response empty")
+                res.send('No results returned for that time period.').end();
+            }
+            else{
+                console.log("response full")
+                res.send(response);
+            }
+  
+        });
+    });
 };
