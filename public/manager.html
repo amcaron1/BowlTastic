@@ -8,60 +8,65 @@
     <link href="https://fonts.googleapis.com/css?family=Hind|Satisfy" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 </head>
 <body>
 
 
-    
-<div class="thisisbackground">
-
-<!---this is the start of header-->
 
 
+                <div class="thisisbackground">
 
-<div class="container">
-    <div class="row one">
-      <div class="col-sm-3">
-            <h1 class ="header">Bowl-tastic</h1>
-      </div>
-      <div class="col-sm-9">
-            <div class="lane">
+                <!---this is the start of header-->
 
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                   width="63.167px" height="63px" viewBox="0 0 63.167 63" enable-background="new 0 0 63.167 63" xml:space="preserve" class="bowling-ball">
-              
-            
-        
-            
-            
-              <ellipse fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="43.5" cy="23.833" rx="12.917" ry="17.833"/>
-            <g>          <path d="M20.143,3.99c3.681-1.574,7.541-2.36,11.581-2.36s7.9,0.787,11.581,2.36c3.681,1.573,6.856,3.695,9.526,6.366
-                      c2.67,2.67,4.793,5.846,6.365,9.526c1.573,3.68,2.36,7.541,2.36,11.581s-0.787,7.9-2.36,11.581
-                      c-1.572,3.681-3.695,6.856-6.365,9.526c-2.67,2.671-5.847,4.793-9.526,6.367c-3.681,1.572-7.541,2.358-11.581,2.358
-                      s-7.9-0.787-11.581-2.358c-3.681-1.574-6.856-3.696-9.526-6.367c-2.671-2.67-4.793-5.846-6.366-9.526
-                      c-1.573-3.68-2.36-7.541-2.36-11.581s0.787-7.9,2.36-11.581c1.573-3.681,3.695-6.856,6.366-9.526
-                      C13.287,7.685,16.462,5.562,20.143,3.99z M38.119,30.735c1.176,0,2.18-0.418,3.016-1.253c0.835-0.835,1.253-1.84,1.253-3.016
-                      c0-1.176-0.418-2.18-1.253-3.016c-0.836-0.835-1.84-1.252-3.016-1.252c-1.175,0-2.18,0.417-3.016,1.252
-                      c-0.835,0.835-1.252,1.84-1.252,3.016c0,1.176,0.417,2.18,1.252,3.016C35.939,30.317,36.944,30.735,38.119,30.735z M44.136,17.42
-                      c0.854-0.836,1.281-1.84,1.281-3.016c0-1.175-0.428-2.18-1.281-3.015c-0.836-0.835-1.842-1.253-3.016-1.253
-                      c-1.176,0-2.181,0.418-3.016,1.253s-1.253,1.84-1.253,3.015c0,1.176,0.418,2.18,1.253,3.016c0.834,0.835,1.84,1.253,3.016,1.253
-                      C42.294,18.673,43.3,18.255,44.136,17.42z M45.914,23.466c0,1.175,0.416,2.18,1.252,3.015c0.834,0.835,1.84,1.253,3.016,1.253
-                      c1.175,0,2.18-0.418,3.015-1.253s1.253-1.84,1.253-3.015c0-1.175-0.418-2.18-1.253-3.016c-0.834-0.835-1.84-1.252-3.015-1.252
-                      c-1.176,0-2.182,0.417-3.016,1.252C46.33,21.286,45.914,22.291,45.914,23.466z"/>
-              </g>
-             
-        
-              </svg>
-              </div>
-              
-              </div>
-      </div>
-                
-                
-                
-                
-                
+
+
+                <div class="container">
+                    <div class="row one">
+                      <div class="col-sm-3">
+                            <h1 class ="header">Bowl-tastic</h1>
+                      </div>
+                      <div class="col-sm-9">
+                            <div class="lane">
+
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                           width="63.167px" height="63px" viewBox="0 0 63.167 63" enable-background="new 0 0 63.167 63" xml:space="preserve" class="bowling-ball">
+
+
+
+
+
+                                      <ellipse fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="43.5" cy="23.833" rx="12.917" ry="17.833"/>
+                                    <g>          <path d="M20.143,3.99c3.681-1.574,7.541-2.36,11.581-2.36s7.9,0.787,11.581,2.36c3.681,1.573,6.856,3.695,9.526,6.366
+                                              c2.67,2.67,4.793,5.846,6.365,9.526c1.573,3.68,2.36,7.541,2.36,11.581s-0.787,7.9-2.36,11.581
+                                              c-1.572,3.681-3.695,6.856-6.365,9.526c-2.67,2.671-5.847,4.793-9.526,6.367c-3.681,1.572-7.541,2.358-11.581,2.358
+                                              s-7.9-0.787-11.581-2.358c-3.681-1.574-6.856-3.696-9.526-6.367c-2.671-2.67-4.793-5.846-6.366-9.526
+                                              c-1.573-3.68-2.36-7.541-2.36-11.581s0.787-7.9,2.36-11.581c1.573-3.681,3.695-6.856,6.366-9.526
+                                              C13.287,7.685,16.462,5.562,20.143,3.99z M38.119,30.735c1.176,0,2.18-0.418,3.016-1.253c0.835-0.835,1.253-1.84,1.253-3.016
+                                              c0-1.176-0.418-2.18-1.253-3.016c-0.836-0.835-1.84-1.252-3.016-1.252c-1.175,0-2.18,0.417-3.016,1.252
+                                              c-0.835,0.835-1.252,1.84-1.252,3.016c0,1.176,0.417,2.18,1.252,3.016C35.939,30.317,36.944,30.735,38.119,30.735z M44.136,17.42
+                                              c0.854-0.836,1.281-1.84,1.281-3.016c0-1.175-0.428-2.18-1.281-3.015c-0.836-0.835-1.842-1.253-3.016-1.253
+                                              c-1.176,0-2.181,0.418-3.016,1.253s-1.253,1.84-1.253,3.015c0,1.176,0.418,2.18,1.253,3.016c0.834,0.835,1.84,1.253,3.016,1.253
+                                              C42.294,18.673,43.3,18.255,44.136,17.42z M45.914,23.466c0,1.175,0.416,2.18,1.252,3.015c0.834,0.835,1.84,1.253,3.016,1.253
+                                              c1.175,0,2.18-0.418,3.015-1.253s1.253-1.84,1.253-3.015c0-1.175-0.418-2.18-1.253-3.016c-0.834-0.835-1.84-1.252-3.015-1.252
+                                              c-1.176,0-2.182,0.417-3.016,1.252C46.33,21.286,45.914,22.291,45.914,23.466z"/>
+                                      </g>
+
+
+                                      </svg>
+                                      </div>
+
+                                      </div>
+                      </div>
+
+
+
+
+
+
     <!-- this is the beginning-->
 
     <div class="container">
@@ -79,7 +84,10 @@
                         <button class="btn-btn" id="employeeListButton" class="btn btn-primary">Employee List</button>
                     </div>
                     <div class="col-sm-6 text-center button-grid">
-                        <button class="btn-btn" id="timeoffRequestButton" class="btn btn-primary">Timeoff Requests</button>
+
+
+                        <button type="button" id="timeoffButton" class="btn-btn">Timeoff List</button>
+
                     </div>
                 </div>
 
@@ -108,7 +116,73 @@
 </body>
 </html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="./js/manager.js"></script>
 
+
+
+
+
+    //Timeoff button
+    $("#timeoffButton").on("click",function() {
+        event.preventDefault();
+
+        $("#managerDisplay").empty();
+
+
+        displayTimeoff();
+    });
+
+    function displayTimeoff() {
+
+        var timeoffTable = $("<table>");
+        timeoffTable.addClass("table table-hover managerTable");
+        timeoffTable.append("<tr>");
+        timeoffTable.append("<th>Name</th>");
+        timeoffTable.append("<th>Start Date</th>");
+        timeoffable.append("<th>End Date</th>");
+        timeoffTable.append("<th>Approved</th>");
+        timeoffTable.append("<th>Denied</th>");
+        timeoffTable.append("</tr>");
+
+        $.get("/api/timeoffRequests", function(req, results) {
+
+            // Loops through the results array
+            for (var i = 0; i < results.length; i++) {
+
+                // Converts date
+                var start_dateConverted = moment(results[i].start_date).format("MM/DD/YYYY");
+                var end_dateConverted = moment(results[i].end_date).format("MM/DD/YYYY");
+
+                timeoffTable.append("<tr>");
+                timeoffTable.append("<td>" + results[i].name + "</td>");
+                timeoffTable.append("<td>" + start_dateConverted + "</td>");
+                timeoffTable.append("<td>" + end_dateConverted + "</td>");
+                timeoffTable.append('<td><button type="button" class="btn btn-success approved" id=' + reuslts[i].id + '>&#9989</button></td>')
+                timeoffTable.append('<td><button type="button" class="btn btn-success denied" id='+ reuslts[i].id + '>&#10060</button></td>')
+                timeoffTable.append("<tr>");
+            }
+            console.log(results);
+        })
+        $("#managerDisplay").append(timeoffTable);
+    };
+
+    $(".approved").on("click",function() {
+        event.preventDefault();
+
+        var objToSend = {id: $(this).attr("id"), answer: 1};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+
+        })
+    });
+
+    $(".denied").on("click",function() {
+        event.preventDefault();
+
+        var objToSend = {id: $(this).attr("id"), answer: 0};
+        $.post("/api/timeoff/requests", objToSend, function(response){
+
+        })
+
+    });
+
+
+<script src="./js/manager.js"></script>
