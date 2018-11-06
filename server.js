@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var db = require("./models");
 var passport = require("passport");
-
+var bcrypt = require("bcrypt")
 var auth = require("./routes/auth.js")(passport);
 
 var app = express();
@@ -47,5 +47,12 @@ db.sequelize.sync(syncOptions).then(function() {
     );
   });
 });
-
+// db.Employee.findAll({}).then(response=>{
+//         for(let i in response){
+//             var hash = bcrypt.hashSync(response[i].dataValues.password, 10);
+//
+//             db.Employee.update({password:hash},{where:{id:response[i].dataValues.id}})
+//
+//         }
+// });
 module.exports = app;

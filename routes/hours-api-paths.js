@@ -7,12 +7,13 @@ module.exports = function(app) {
   app.post("/api/gethours", function(req, res) {
       db.Hour.findAll({
           where: {
-              createdAt: {
+              timein: {
                   [Op.between]: [moment(req.body.date1).format("YYYY-MM-DD HH:mm:ss"),moment(req.body.date2).format("YYYY-MM-DD HH:mm:ss")]
               },
               EmployeeId:req.user.id
           }
       }).then(response=>{
+          console.log(response)
           if (response[0] === undefined) {
               console.log("response empty")
               res.send('No results returned for that time period.').end();
