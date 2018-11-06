@@ -19,7 +19,7 @@ module.exports = function(app) {
 
     // Each record represents one shift
     // Returns id, name, email, pay_rate, and shift (number of hours for that shift)
-    sequelize.query("SELECT employees.id, employees.name, employees.email, salaries.pay_rate, SUM(TIME_TO_SEC(TIMEDIFF(hours.timeout, hours.timein))/3600) AS total_hours FROM employees LEFT JOIN hours ON employees.id = hours.EmployeeId LEFT JOIN salaries ON employees.id = salaries.EmployeeId WHERE (employees.end_date < '1969-00-00' OR employees.end_date IS NULL) AND (salaries.end_date < '1969-00-00' OR salaries.end_date IS NULL) AND hours.timein > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY employees.id ORDER BY employees.id ASC", {type: sequelize.QueryTypes.SELECT})
+    sequelize.query("SELECT Employees.id, Employees.name, Employees.email, Salaries.pay_rate, SUM(TIME_TO_SEC(TIMEDIFF(Hours.timeout, Hours.timein))/3600) AS total_hours FROM Employees LEFT JOIN Hours ON Employees.id = Hours.EmployeeId LEFT JOIN Salaries ON Employees.id = Salaries.EmployeeId WHERE (Employees.end_date < '1969-00-00' OR Employees.end_date IS NULL) AND (Salaries.end_date < '1969-00-00' OR Salaries.end_date IS NULL) AND Hours.timein > DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY Employees.id ORDER BY Employees.id ASC", {type: sequelize.QueryTypes.SELECT})
       .then(function(results) {
 
         // Email variables
