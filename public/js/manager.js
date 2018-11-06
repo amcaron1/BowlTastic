@@ -10,15 +10,19 @@ function displayEmployees() {
     let addedButtonDiv = $("<div>");
         addedButtonDiv.attr("id", "addedButtonDiv");
         addedButtonDiv.addClass("row button-grid text-center");
+
     let newEmployeeButton = $("<div class='col-sm-4'>");
-        newEmployeeButton.append("<button id='newEmployeeButton' class='btn btn-primary'>Add New Employee</button>")
+        newEmployeeButton.append("<button id='newEmployeeButton' class='btn btn-primary'>Add New Employee</button>");
     $(addedButtonDiv).append(newEmployeeButton);
+
     let updateEmployeeButton = $("<div class='col-sm-4'>");
         updateEmployeeButton.append("<button id='updateEmployeeButton' class='btn btn-primary'>Update Employee</button>");
     $(addedButtonDiv).append(updateEmployeeButton);
+
     let removeEmployeeButton = $("<div class='col-sm-4'>");
     removeEmployeeButton.append("<button id='removeEmployeeButton' class='btn btn-primary'>Remove Employee</button>");
     $(addedButtonDiv).append(removeEmployeeButton);
+
     $("#managerDisplay").append(addedButtonDiv);
     let employeeTable = $("<table>");
         employeeTable.addClass("table table-hover employeeTable");
@@ -33,19 +37,19 @@ function displayEmployees() {
     $.get("/api/employees", function(response) {
         
         for (i=0;i<response.length;i++) {
-                employeeTable.append("<tr>");
-                    employeeTable.append("<td>"+response[i].id+"</td>");
-                    employeeTable.append("<td>"+response[i].name+"</td>");
-                    employeeTable.append("<td>"+response[i].email+"</td>");
-                    employeeTable.append("<td>"+response[i].username+"</td>");
-                    employeeTable.append("<td>"+response[i].start_date+"</td>");
-                    if (response[i].end_date === null) {
-                        employeeTable.append("<td>Active</td>");
-                    }
-                    else {
-                        employeeTable.append("<td>"+response[i].end_date+"</td>");
-                    }
-                employeeTable.append("</tr>")
+            employeeTable.append("<tr>");
+                employeeTable.append("<td>"+response[i].id+"</td>");
+                employeeTable.append("<td>"+response[i].name+"</td>");
+                employeeTable.append("<td>"+response[i].email+"</td>");
+                employeeTable.append("<td>"+response[i].username+"</td>");
+                employeeTable.append("<td>"+response[i].start_date+"</td>");
+                if (response[i].end_date === null) {
+                    employeeTable.append("<td>Active</td>");
+                }
+                else {
+                    employeeTable.append("<td>"+response[i].end_date+"</td>");
+                }
+            employeeTable.append("</tr>")
         }
     });
     $("#managerDisplay").append(employeeTable);
@@ -170,30 +174,61 @@ $(document).on("click","#employeeCancel",function() {
     displayEmployees();
 });
 
-//Payroll button
-$("#payrollButton").on("click",function() {
-    event.preventDefault();
-    //Figure out what data will be available to display with this button.
-    $("#managerDisplay").empty();
-});
+//Timeoff Requests button
 
 //Employee Timeclock button
-$("#timeclockButton").on("click",function() {
+$(document).on("click", "#timeclockButton", function() {
     event.preventDefault();
     
     $("#managerDisplay").empty();
-    let timeclockTable = $("<table>");
-        timeclockTable.addClass("table table-hover managerTable");
-        timeclockTable.append("<tr>");
-            timeclockTable.append("<th>Employee ID</th>");
-            timeclockTable.append("<th>Name</th>");
-            timeclockTable.append("<th>Date</th>");
-            timeclockTable.append("<th>Time In</th>");
-            timeclockTable.append("<th>Time Out</th>");
-        timeclockTable.append("</tr>");
-    //For loop to append objects from database as a new table row
-    $("#managerDisplay").append(timeclockTable);
+    timeclockPullNames();
+
 });
+
+function timeclockPullNames() {
+    $.get("/api/employees").then(response => {
+        let employeeSelectDropdown = $("<select id=employeeSelectDropdown>");
+
+            for (i=0;i<response.length;i++) {
+                let idName = response[i].id+". "+response[i].name;
+
+                employeeSelectDropdown.append("<option value='"+response[i].id+"'>"+idName+"</option>");
+            }
+
+            employeeSelectDropdown.append("</select>");
+
+        $("#managerDisplay").append(employeeSelectDropdown)
+        $("#managerDisplay").append("<br><button class='btn btn-primary addedButton' id='employeeSelectGo'>Pull Timepunches</button>")
+    
+        $("#employeeSelectGo").on("click",function() {
+            $("#timeclockTable").remove();
+
+            let timeclockTable = $("<table id='timeclockTable'>");
+                timeclockTable.addClass("table table-hover employeeTable");
+                timeclockTable.append("<tr>");
+                    timeclockTable.append("<th>Employee ID</th>");
+                    timeclockTable.append("<th>Name</th>");
+                    timeclockTable.append("<th>Date</th>");
+                    timeclockTable.append("<th>Time In</th>");
+                    timeclockTable.append("<th>Time Out</th>");
+                timeclockTable.append("</tr>");
+
+            
+            $("#managerDisplay").append(timeclockTable);
+        });
+    });
+}
+
+
+//Employee Timeclock, after selecting an employee from the dropdown
+// $(document).on("click", "#employeeSelectGo", function() {
+//     event.preventDefault();
+
+//     $("#managerDisplay").empty();
+
+
+// });
+
 
 //Current employee roles button
 $("#rolesButton").on("click",function() {
@@ -201,7 +236,7 @@ $("#rolesButton").on("click",function() {
     
     $("#managerDisplay").empty();
     let rolesTable = $("<table>");
-        rolesTable.addClass("table table-hover managerTable");
+        rolesTable.addClass("table table-hover employeeTable");
         rolesTable.append("<tr>");
             rolesTable.append("<th>Employee ID</th>");
             rolesTable.append("<th>Name</th>");
