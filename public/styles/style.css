@@ -147,6 +147,12 @@ align-content: center;
     border-color: #1b3459 !important;
 }
 
+.btn-primary:hover {
+    color: #fff;
+    background-color: #8C9AAB !important;
+    border-color: #8C9AAB !important;
+}
+
 .denied {
     background-color: red !important;
     border-color: red !important;
@@ -155,6 +161,11 @@ align-content: center;
 #switchToEmployeeView {
     align-content: right;
 }
+
+.makeSmaller {
+    height: 50%
+}
+
 
 @media screen and (min-width: 600px) {
 .button-grid {
@@ -186,6 +197,7 @@ table {
     width: 100%;
 }
 }
+
 @media screen and (min-width: 600px) {
 td, th {
     border: 1px solid #dddddd;
